@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class MortgageAmountTextfield extends StatefulWidget {
   final void Function(String amountString) onMortgageAmountChanged;
-  const MortgageAmountTextfield(
+  double? mortgageAmount;
+  MortgageAmountTextfield(this.mortgageAmount,
       {super.key, required this.onMortgageAmountChanged});
   @override
   State<MortgageAmountTextfield> createState() =>
@@ -53,11 +54,14 @@ class _MortgageAmountTextfieldState extends State<MortgageAmountTextfield> {
                 ),
               ),
               Expanded(
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: textEditingController,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: textEditingController,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                    ),
                   ),
                 ),
               ),
