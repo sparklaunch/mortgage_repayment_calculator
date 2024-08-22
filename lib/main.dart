@@ -8,6 +8,7 @@ void main() {
         fontFamily: "PlusJakartaSans",
       ),
       home: const Scaffold(
+        backgroundColor: Colors.white,
         body: MainScreen(),
       ),
     ),
