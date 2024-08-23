@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:mortgage_repayment_calculator/components/empty.dart';
 import 'package:mortgage_repayment_calculator/components/interest_rate_textfield.dart';
 import 'package:mortgage_repayment_calculator/components/mortgage_amount_textfield.dart';
 import 'package:mortgage_repayment_calculator/components/mortgage_term_textfield.dart';
@@ -16,16 +18,25 @@ class _MainScreenState extends State<MainScreen> {
   int? mortgageTerm;
   double? interestRate;
   Mortgage? mortgage;
+  bool get isEmpty {
+    return mortgageAmount == null ||
+        mortgageTerm == null ||
+        interestRate == null ||
+        mortgage == null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SafeArea(
+        bottom: false,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Text(
                     "Mortgage Calculator",
@@ -39,6 +50,7 @@ class _MainScreenState extends State<MainScreen> {
                     onPressed: () {},
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(0),
+                      alignment: Alignment.centerLeft,
                     ),
                     child: const Text(
                       "Clear All",
@@ -67,14 +79,35 @@ class _MainScreenState extends State<MainScreen> {
                     mortgage: mortgage,
                     onMortgageChanged: onMortgageChanged,
                   ),
+                  const SizedBox(height: 20),
+                  ElevatedButton.icon(
+                    onPressed: calculateRepayments,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(212, 214, 42, 1),
+                      foregroundColor: const Color.fromRGBO(19, 42, 56, 1),
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "PlusJakartaSans",
+                      ),
+                      padding: const EdgeInsets.all(20),
+                    ),
+                    icon: SvgPicture.asset(
+                      "assets/images/Calculator.svg",
+                    ),
+                    label: const Text("Calculate Repayments"),
+                  )
                 ],
               ),
-            )
+            ),
+            if (isEmpty) const Empty() else Container()
           ],
         ),
       ),
     );
   }
+
+  void calculateRepayments() {}
 
   void onInterestRateChanged(String rateString) {
     final filteredRate = rateString.replaceAll(RegExp("[A-Za-z]"), "");
