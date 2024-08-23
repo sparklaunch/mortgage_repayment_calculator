@@ -26,6 +26,14 @@ class _MainScreenState extends State<MainScreen> {
         mortgage == null;
   }
 
+  double get monthlyRepayments {
+    return mortgageAmount! * mortgageTerm!.toDouble() * interestRate!;
+  }
+
+  double get total {
+    return monthlyRepayments;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -101,7 +109,10 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
             ),
-            if (isEmpty) const Empty() else const Results(),
+            if (isEmpty)
+              const Empty()
+            else
+              Results(monthlyRepayments: monthlyRepayments, total: total),
           ],
         ),
       ),

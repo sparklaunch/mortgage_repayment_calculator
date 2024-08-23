@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Results extends StatelessWidget {
-  const Results({super.key});
+  final double monthlyRepayments;
+  final double total;
+  final formatter = NumberFormat.simpleCurrency(locale: "en_GB");
+  Results({super.key, required this.monthlyRepayments, required this.total});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,9 +60,9 @@ class Results extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text(
-                          "179774",
-                          style: TextStyle(
+                        Text(
+                          formatter.format(monthlyRepayments),
+                          style: const TextStyle(
                             fontSize: 48,
                             fontWeight: FontWeight.bold,
                             color: Color.fromRGBO(204, 202, 29, 1),
@@ -78,9 +82,9 @@ class Results extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text(
-                          "53932294",
-                          style: TextStyle(
+                        Text(
+                          formatter.format(total),
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
