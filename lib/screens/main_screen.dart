@@ -56,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: clearAll,
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(0),
                       alignment: Alignment.centerLeft,
@@ -120,6 +120,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void calculateRepayments() {}
+
+  void clearAll() {}
 
   void onInterestRateChanged(String rateString) {
     final filteredRate = rateString.replaceAll(RegExp("[A-Za-z]"), "");
