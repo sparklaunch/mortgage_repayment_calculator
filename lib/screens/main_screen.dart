@@ -5,6 +5,7 @@ import 'package:mortgage_repayment_calculator/components/interest_rate_textfield
 import 'package:mortgage_repayment_calculator/components/mortgage_amount_textfield.dart';
 import 'package:mortgage_repayment_calculator/components/mortgage_term_textfield.dart';
 import 'package:mortgage_repayment_calculator/components/mortgage_type.dart';
+import 'package:mortgage_repayment_calculator/components/results.dart';
 import 'package:mortgage_repayment_calculator/models/mortgage.dart';
 
 class MainScreen extends StatefulWidget {
@@ -100,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
             ),
-            if (isEmpty) const Empty() else Container()
+            if (isEmpty) const Empty() else const Results(),
           ],
         ),
       ),
