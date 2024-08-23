@@ -1,0 +1,1 @@
+enum Mortgage { repayment, interestOnly }

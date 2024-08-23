@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mortgage_repayment_calculator/components/interest_rate_textfield.dart';
 import 'package:mortgage_repayment_calculator/components/mortgage_amount_textfield.dart';
 import 'package:mortgage_repayment_calculator/components/mortgage_term_textfield.dart';
+import 'package:mortgage_repayment_calculator/components/mortgage_type.dart';
+import 'package:mortgage_repayment_calculator/models/mortgage.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -13,6 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   double? mortgageAmount;
   int? mortgageTerm;
   double? interestRate;
+  Mortgage? mortgage;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -59,6 +62,11 @@ class _MainScreenState extends State<MainScreen> {
                   InterestRateTextfield(
                     onInterestRateChanged: onInterestRateChanged,
                   ),
+                  const SizedBox(height: 20),
+                  MortgageType(
+                    mortgage: mortgage,
+                    onMortgageChanged: onMortgageChanged,
+                  ),
                 ],
               ),
             )
@@ -81,6 +89,12 @@ class _MainScreenState extends State<MainScreen> {
     final amount = double.tryParse(filteredAmount);
     setState(() {
       mortgageAmount = amount;
+    });
+  }
+
+  void onMortgageChanged(Mortgage? mortgageValue) {
+    setState(() {
+      mortgage = mortgageValue;
     });
   }
 
